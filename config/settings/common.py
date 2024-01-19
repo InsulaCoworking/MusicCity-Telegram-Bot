@@ -12,7 +12,6 @@ https://docs.djangoproject.com/en/dev/ref/settings/
 import environ
 
 ROOT_DIR = environ.Path(__file__) - 3  # (base_dir/config/settings/common.py - 3 = base_dir/)
-PROJ_DIR = ROOT_DIR.path('dproject')
 DATA_DIR = ROOT_DIR.path('data')
 
 env = environ.Env()
@@ -138,10 +137,6 @@ SITE_ID = 1
 # See: https://docs.djangoproject.com/en/dev/ref/settings/#use-i18n
 USE_I18N = True
 
-LOCALE_PATHS = [
-    PROJ_DIR('locale'),
-]
-
 # See: https://docs.djangoproject.com/en/dev/ref/settings/#use-l10n
 USE_L10N = True
 
@@ -157,7 +152,7 @@ TEMPLATES = [
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
         # See: https://docs.djangoproject.com/en/dev/ref/settings/#template-dirs
         'DIRS': [
-            str(PROJ_DIR.path('templates')),
+
         ],
         'OPTIONS': {
             # See: https://docs.djangoproject.com/en/dev/ref/settings/#template-debug
@@ -190,15 +185,15 @@ TEMPLATES = [
 # STATIC FILE CONFIGURATION
 # ------------------------------------------------------------------------------
 # See: https://docs.djangoproject.com/en/dev/ref/settings/#static-root
-STATIC_ROOT = str(PROJ_DIR('staticfiles'))
-FILE_UPLOAD_TEMP_DIR = str(PROJ_DIR('tmp'))
+#STATIC_ROOT =
+#FILE_UPLOAD_TEMP_DIR =
 
 # See: https://docs.djangoproject.com/en/dev/ref/settings/#static-url
 STATIC_URL = '/static/'
 
 # See: https://docs.djangoproject.com/en/dev/ref/contrib/staticfiles/#std:setting-STATICFILES_DIRS
 STATICFILES_DIRS = (
-    str(PROJ_DIR.path('static')),
+
 )
 
 # See: https://docs.djangoproject.com/en/dev/ref/contrib/staticfiles/#staticfiles-finders
@@ -210,7 +205,7 @@ STATICFILES_FINDERS = (
 # MEDIA CONFIGURATION
 # ------------------------------------------------------------------------------
 # See: https://docs.djangoproject.com/en/dev/ref/settings/#media-root
-MEDIA_ROOT = str(PROJ_DIR('media'))
+# MEDIA_ROOT =
 
 # See: https://docs.djangoproject.com/en/dev/ref/settings/#media-url
 MEDIA_URL = '/media/'
