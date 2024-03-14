@@ -34,7 +34,7 @@ def get_events_cache():
 
 
 def get_events_api():
-    response = requests.get(f'{URL_BASE}/api/v1/upcoming_events/')
+    response = requests.get(f'{URL_BASE}/api/v1/upcoming_events/?limit=5000')
     if response.status_code == 200:
         events = Event.parse_events(response.text)
         Preference.set(PREF_EVENTS_CACHE, response.text)
