@@ -135,7 +135,7 @@ def callback_query(update, context):
         answer_text = tag.name if tag else 'No se encuentra el Tag'
         context.bot.answer_callback_query(callback_query_id=query.id)  # , text=answer_text (for banner message)
         events_filtered = filter_events(tag_id)
-        filter_text = f'Filtrando por {answer_text.upper()}\nPulsa /eventos para mostrar todos'
+        filter_text = f'Filtrando por {answer_text.upper()}\nPulsa /conciertos para mostrar todos'
         text = prepare_text(events_filtered, filter_text, no_events_text=f'No hay eventos para la categoría: {answer_text.upper()}')
         context.bot.edit_message_text(chat_id=chat_id, message_id=query.message.message_id,
                                       text=text[0], parse_mode="HTML", disable_web_page_preview=True, reply_markup=tags_keyboard())
