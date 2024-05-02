@@ -85,7 +85,7 @@ def create_custom_festivals():
     if datetime.now() <= datetime(2024, 6, 9, 23, 59, 59):
         custom_fest = {
             'id': 2,
-            'image': 'https://alcalasuena.es/media/news/5725539a-fe34-486b-81f7-14977f156fa6.jpeg',
+            'image': 'https://alcalasuena.es/media/news/ca36063c-34af-4175-b063-88e032ee15ca.jpeg',
             'caption': f'<b>Alcalá Suena</b>\n<i>07/06/2023 - 09/06/2023</i>',
             'buttons': [
                 ('Visitar página web', 'https://alcalasuena.es/'),
