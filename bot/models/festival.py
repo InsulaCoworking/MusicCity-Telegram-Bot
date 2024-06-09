@@ -1,6 +1,6 @@
 
 from bot.bot_config import URL_BASE
-from datetime import datetime
+from datetime import datetime, time
 import json
 
 
@@ -38,10 +38,10 @@ class Festival:
 
     def is_active(self):
         if self.end_date:
-            end_date = datetime.strptime(self.end_date, "%Y-%m-%d")
+            end_date = datetime.combine(datetime.strptime(self.end_date, "%Y-%m-%d"), time.max)
             return datetime.now() <= end_date
         elif self.start_date:
-            start_date = datetime.strptime(self.start_date, "%Y-%m-%d")
+            start_date = datetime.combine(datetime.strptime(self.start_date, "%Y-%m-%d"), time.max)
             return datetime.now() <= start_date
         else:
             return False
