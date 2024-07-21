@@ -53,7 +53,7 @@ class BotConfig(AppConfig):
         dispatcher.add_handler(MessageHandler(Filters.text & Filters.regex('^(?i)avisos$'), handlers.notices))
 
         dispatcher.add_handler(CommandHandler('noticias', handlers.news))
-        dispatcher.add_handler(MessageHandler(Filters.text & Filters.regex('^(?i)noticias$'), handlers.news))
+        dispatcher.add_handler(MessageHandler(Filters.text & Filters.regex('(?i)^noticias$'), handlers.news))
 
         dispatcher.add_handler(CommandHandler('bolo', handlers.add))
 
