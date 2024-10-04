@@ -35,6 +35,8 @@ def event_info(event):
         if event.price_preorder and event.price_preorder != event.price:
             text += ' (Anticipada: %.2f€)' % event.price_preorder
 
+    text += '\n\n' + event.description[:3000]
+
     return text
 
 
