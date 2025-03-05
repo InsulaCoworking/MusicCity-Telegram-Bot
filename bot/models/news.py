@@ -3,6 +3,7 @@ from bot.bot_config import URL_BASE
 from datetime import datetime
 import json
 
+from bot.utils.utils import cleanhtml
 
 DATETIME_FORMAT_API = "%Y-%m-%dT%H:%M:%S"
 
@@ -12,7 +13,7 @@ class News:
     def __init__(self, id, title, excerpt, publication_date, url_path, live):
         self.id = id
         self.title = title
-        self.excerpt = excerpt
+        self.excerpt = cleanhtml(excerpt)
         self.publication_date = publication_date
         self.url_path = url_path
         self.live = live
