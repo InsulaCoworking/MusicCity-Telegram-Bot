@@ -4,25 +4,21 @@ from datetime import datetime
 import json
 
 
-DATETIME_FORMAT_API = "%Y-%m-%dT%H:%M:%S"
+DATETIME_FORMAT_API = "%Y-%m-%dT%H:%M:%S.%f"
 
 
 class News:
 
-    def __init__(self, id, title, subtitle, image, publication_date, slug, status):
+    def __init__(self, id, title, excerpt, publication_date, url_path, live):
         self.id = id
         self.title = title
-        self.subtitle = subtitle
-        self.image = image
+        self.excerpt = excerpt
         self.publication_date = publication_date
-        self.slug = slug
-        self.status = status
+        self.url_path = url_path
+        self.live = live
 
     def get_web_link(self):
-        return f'{URL_BASE}/blog/{self.date_url()}/{self.slug}'
-
-    def get_image_url(self):
-        return f'{URL_BASE}{self.image}'
+        return f'{URL_BASE}{self.url_path}'
 
     def get_publication_date_human(self):
         pub_date = datetime.strptime(self.publication_date, DATETIME_FORMAT_API)
@@ -40,14 +36,13 @@ class News:
             news = News(
                 news_api['id'],
                 news_api['title'],
-                news_api['lead'],
-                news_api['image'],
-                news_api['publication_date'],
-                news_api['slug'],
-                news_api['status'],
+                news_api['excerpt'],
+                news_api['date'],
+                news_api['url_path'],
+                news_api['live'],
             )
 
-            if news.status == 2:   # published
+            if news.live and news.url_path.startswith('/blog/'):
                 news_list.append(news)
 
         news_sorted = sorted(
