@@ -4,7 +4,7 @@ from datetime import datetime
 import json
 
 
-DATETIME_FORMAT_API = "%Y-%m-%dT%H:%M:%S.%f"
+DATETIME_FORMAT_API = "%Y-%m-%dT%H:%M:%S"
 
 
 class News:
