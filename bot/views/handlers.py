@@ -209,6 +209,8 @@ def callback_query(update, context):
 
     elif type == InlineButton.ADMIN_MESSAGE:
         message = query.message.text
+        context.bot.edit_message_text(chat_id=chat_id, message_id=query.message.message_id,
+                                      text="Enviando...", parse_mode="HTML", reply_markup=telegram.InlineKeyboardMarkup([]))
         send_to_all(context.bot, message)
 
     context.bot.answer_callback_query(callback_query_id=query.id)
