@@ -129,9 +129,9 @@ def custom_fest_keyboard(fest_buttons):
 
 def admin_message_keyboard():
 
-    user_count = UserChat.objects.all().count()
+    user_active_count = UserChat.objects.filter(is_active=True).count()
     items = [
-        InlineButton(f'Enviar a {user_count} usuari@s', InlineButton.ADMIN_MESSAGE),
+        InlineButton(f'Enviar a {user_active_count} usuari@s', InlineButton.ADMIN_MESSAGE),
     ]
 
     return create_inline_keyboard(items, 2)
