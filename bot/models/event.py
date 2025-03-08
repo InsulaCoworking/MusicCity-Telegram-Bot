@@ -15,7 +15,7 @@ TIME_FORMAT_HUMAN = '%H:%M'
 DAYS_FUTURE_EVENTS = 60
 
 class Band:
-    def __init__(self, id, name, genre, description, tag_id=-1, tag_name=None, band_image=None):
+    def __init__(self, id, name, genre, description, tag_id=None, tag_name=None, band_image=None):
         self.id = id
         self.name = name
         self.genre = genre
