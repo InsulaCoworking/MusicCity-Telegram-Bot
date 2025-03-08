@@ -5,7 +5,19 @@ from django.core.management.base import BaseCommand
 from bot.dev_config import *
 from bot.models.user_chat import UserChat
 from bot.views.events import *
+from bot.models.event import DATETIME_FORMAT_API
+from bot.utils.utils import TerminalColors
 
+DAYS_SOON = 15
+
+def is_soon(event):
+    try:
+        day = datetime.strptime(event.datetime, DATETIME_FORMAT_API)
+        future = datetime.now() + timedelta(days=DAYS_SOON)
+        return day < future
+    except:
+        print(f"\n\n{TerminalColors.ERROR}(caught) error date: {event.datetime}{TerminalColors.ENDC}\n\n")
+        return False
 
 class Command(BaseCommand):
     help = 'Notify new events to users (for cron jobs)'
@@ -20,6 +32,8 @@ class Command(BaseCommand):
         events = get_events()
         if not events:
             return
+
+        events_soon = list(filter(lambda event_item : is_soon(event_item), events))
 
         if developing:
             user_chats = UserChat.objects.filter(id_chat=dev_chat_id)
@@ -36,7 +50,7 @@ class Command(BaseCommand):
 
             has_subscriptions = TagSubscription.objects.filter(id_chat=chat_id)
 
-            for event in events:
+            for event in events_soon:
                 # If no subscriptions, notify all
                 if not has_subscriptions:
                     if event.id not in ids_events_notified:
@@ -61,7 +75,8 @@ class Command(BaseCommand):
             if events_notify:
 
                 try:
-                    prepare_text_and_send(events_notify, '<b>¡Nuevos conciertos!</b>', bot, chat_id)
+                    initial_text = f'<b>¡Nuevos conciertos!</b>\n<i>En los próximos {DAYS_SOON} días</i>'
+                    prepare_text_and_send(events_notify, initial_text, bot, chat_id)
                     events_notified.ids_events = json.dumps(ids_events_notified)
                     events_notified.save()
                     user_chat.is_active = True

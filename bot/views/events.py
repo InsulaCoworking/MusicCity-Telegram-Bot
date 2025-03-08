@@ -7,8 +7,7 @@ from bot.utils.preference_keys import *
 from bot.utils.keyboards_markup import *
 from bot.bot_config import URL_BASE
 from bot.utils.messages import *
-
-DATETIME_FORMAT_API = '%Y-%m-%d %H:%M:%S'
+from bot.models.event import DATETIME_FORMAT_API
 
 
 def get_events():

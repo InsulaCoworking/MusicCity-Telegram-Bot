@@ -12,6 +12,7 @@ TIME_FORMAT_API = '%H:%M:%S'
 DATE_FORMAT_HUMAN = '%-d %B %Y'
 TIME_FORMAT_HUMAN = '%H:%M'
 
+DAYS_FUTURE_EVENTS = 60
 
 class Band:
     def __init__(self, id, name, genre, description, tag_id=-1, tag_name=None, band_image=None):
@@ -168,7 +169,7 @@ def is_old(event):
 def is_too_future(event):
     try:
         day = datetime.strptime(event.datetime, DATETIME_FORMAT_API)
-        future = datetime.now() + timedelta(days=60)
+        future = datetime.now() + timedelta(days=DAYS_FUTURE_EVENTS)
         return day > future
     except:
         print("(caught) error date: " + event.datetime)

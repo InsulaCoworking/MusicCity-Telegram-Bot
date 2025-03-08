@@ -5,6 +5,8 @@ from bot.models.user_chat import UserChat
 from bot.utils.send_msg import send_to_all, send_dev_chat_message
 from bot.views.news import *
 from .events import *
+from bot.models.event import DAYS_FUTURE_EVENTS
+from bot.utils.utils import TerminalColors
 
 
 def start(update, context):
@@ -47,7 +49,8 @@ def events(update, context):
 
     try:
         events = get_events()
-        prepare_text_and_send(events, '', context.bot, update.effective_chat.id, reply_markup=tags_access_keyboard())
+        initial_text = f'<i>Conciertos programados para los próximos {DAYS_FUTURE_EVENTS} días</i>'
+        prepare_text_and_send(events, initial_text, context.bot, update.effective_chat.id, reply_markup=tags_access_keyboard())
     except Exception as e:
         send_dev_chat_message(context.bot, str(e))
 
@@ -119,7 +122,7 @@ def callback_query(update, context):
 
     chat_id = update.effective_chat.id
 
-    print(f'INLINE MESSAGE ID: {query.inline_message_id}')
+    print(f"\n{TerminalColors.HEADER}INLINE MESSAGE TYPE: {type}{TerminalColors.ENDC}\n")
 
     if type == InlineButton.ACCESS_FILTER_TAGS:
         context.bot.answer_callback_query(callback_query_id=query.id)
