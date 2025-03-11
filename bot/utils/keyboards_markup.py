@@ -3,6 +3,7 @@ from bot.models.event_notices import *
 import json
 from bot.bot_config import URL_BASE
 from bot.models.user_chat import UserChat
+from bot.utils.utils import is_valid_url
 
 
 class InlineButton:
@@ -71,7 +72,7 @@ def tags_notices_keyboard(chat_id):
 
 def event_info_keyboard(event):
     items = []
-    if event.ticket_link:
+    if event.ticket_link and is_valid_url(event.ticket_link):
         items.append(InlineButton('Comprar entradas', InlineButton.URL_BUTTON, url=event.ticket_link))
 
     for band in event.bands:

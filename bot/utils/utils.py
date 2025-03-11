@@ -8,6 +8,10 @@ def cleanhtml(raw_html):
   return cleantext
 
 
+def is_valid_url(url):
+    pattern = r'^(http|https):\/\/([\w.-]+)(\.[\w.-]+)+([\/\w\.-]*)*\/?$'
+    return bool(re.match(pattern, url))
+
 
 class TerminalColors():
     HEADER = '\033[95m'
