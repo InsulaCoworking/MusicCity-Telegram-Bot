@@ -9,9 +9,7 @@ def cleanhtml(raw_html):
 
 
 def is_valid_url(url):
-    pattern = r'^(http|https):\/\/([\w.-]+)(\.[\w.-]+)+([\/\w\.-]*)*\/?$'
-    return bool(re.match(pattern, url))
-
+    return url.startswith("http://") or url.startswith("https://")
 
 class TerminalColors():
     HEADER = '\033[95m'

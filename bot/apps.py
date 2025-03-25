@@ -1,3 +1,5 @@
+from queue import Queue
+
 from django.apps import AppConfig
 
 import logging
@@ -36,7 +38,7 @@ class BotConfig(AppConfig):
         bot = Bot(token)
 
         global dispatcher
-        dispatcher = Dispatcher(bot, None, workers=0, use_context=True)
+        dispatcher = Dispatcher(bot, update_queue=Queue(10))
 
         dispatcher.add_handler(CommandHandler('start', handlers.start))
 
